@@ -37,6 +37,7 @@ EOF
 echo "${indexts}" > "src/index.ts"
 
 npm i --save-dev f2e-server less typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
+echo "node_modules" >> ".gitignore"
 
 f2econfig=`cat << EOF
 const { argv } = process
@@ -125,4 +126,5 @@ EOF
 echo "$indexhtml" > "index.html"
 
 node -e 'let package = require("./package.json");Object.assign(package.scripts, {"start": "f2e start","build": "f2e build"});require("fs").writeFileSync("./package.json", JSON.stringify(package, 0, 2))'
-npm start
+
+echo '\n\trun `npm start` to start app\n'
