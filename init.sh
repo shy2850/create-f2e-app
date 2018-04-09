@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/usr/bin/env bash
+
 npm init -y
 
 if [ ! -d "css" ];then
@@ -8,16 +9,34 @@ fi
 if [ ! -d "css/components" ];then
     mkdir "css/components"
 fi
-echo '@import "./components/";' > css/bundle.less
-echo '#app {\n\twidth: 80%;\n\tmin-height: 400px;\n\tmargin: 0 auto;\n\ttext-align: center;\n}' > css/components/app.less
+echo '@import "./components/";' > "css/bundle.less"
+
+
+
+appless=`cat << EOF
+#app {
+    width: 80%;
+    min-height: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+EOF
+`
+echo "${appless}" > "css/components/app.less"
+
 
 
 if [ ! -d "src" ];then
     mkdir "src"
 fi
-echo "const app = document.getElementById('app')\napp.innerHTML = 'Hello world!'" > src/index.ts
+indexts=`cat << EOF
+const app = document.getElementById('app')
+app.innerHTML = 'Hello world!'
+EOF
+`
+echo "${indexts}" > "src/index.ts"
 
-# npm i --save-dev f2e-server less typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
+npm i --save-dev f2e-server less typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
 
 f2econfig=`cat << EOF
 const { argv } = process
@@ -35,7 +54,7 @@ module.exports = {
 EOF
 `
 echo "$f2econfig" > ".f2econfig.js"
-echo "output" >> .gitignore
+echo "output" >> ".gitignore"
 
 
 tsconfig=`cat << EOF
@@ -58,7 +77,7 @@ tsconfig=`cat << EOF
 EOF
 `
 echo "$tsconfig" > "tsconfig.json"
-echo "dist" >> .gitignore
+echo "dist" >> ".gitignore"
 
 rollupconfig=`cat << EOF
 const typescript = require('rollup-plugin-typescript2')
@@ -80,7 +99,7 @@ module.exports = [{
 EOF
 `
 echo "$rollupconfig" > "rollup.config.js"
-echo ".rpt2_cache" >> .gitignore
+echo ".rpt2_cache" >> ".gitignore"
 
 indexhtml=`cat << EOF
 <!DOCTYPE html>
