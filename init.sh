@@ -46,8 +46,12 @@ module.exports = {
     build,
     useLess: true,
     gzip: true,
-    onRoute: p => p || 'index.html',
-    buildFilter: p => !p || /src|css|index/.test(p),
+    onRoute: p => {
+        if (!p) {
+            return 'index.html'
+        }
+    },
+    buildFilter: p => /src|css|index/.test(p),
     middlewares: [ { middleware: 'rollup' } ],
     output: require('path').join(__dirname, './output')
 }
