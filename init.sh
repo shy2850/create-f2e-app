@@ -36,7 +36,7 @@ EOF
 `
 echo "${indexts}" > "src/index.ts"
 
-npm i --save-dev f2e-server less typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
+npm i --save-dev f2e-server less@2.* typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
 echo "node_modules" >> ".gitignore"
 
 f2econfig=`cat << EOF
