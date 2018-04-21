@@ -12,7 +12,6 @@ fi
 echo '@import "./components/";' > "css/bundle.less"
 
 
-
 appless=`cat << EOF
 #app {
     width: 80%;
@@ -36,7 +35,7 @@ EOF
 `
 echo "${indexts}" > "src/index.ts"
 
-npm i --save-dev f2e-server less@2.* typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
+npm i --save-dev f2e-server typescript rollup f2e-middle-rollup rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-typescript2
 echo "node_modules" >> ".gitignore"
 
 f2econfig=`cat << EOF
@@ -127,4 +126,11 @@ echo "$indexhtml" > "index.html"
 
 node -e 'let package = require("./package.json");Object.assign(package.scripts, {"start": "f2e start","build": "f2e build"});require("fs").writeFileSync("./package.json", JSON.stringify(package, 0, 2))'
 
-echo '\n\trun `npm start` to start app\n'
+welcome=`cat << EOF
+
+    run `npm start` to start app
+
+EOF
+`
+
+echo $welcome
